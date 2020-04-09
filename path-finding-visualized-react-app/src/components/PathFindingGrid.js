@@ -4,7 +4,7 @@ import GridTile from "./GridTile";
 class PathFindingGrid extends React.Component {
   constructor() {
     super();
-    this.state = { width: 60, height: 15 };
+    this.state = { width: 50, height: 15 };
   }
 
   render() {
