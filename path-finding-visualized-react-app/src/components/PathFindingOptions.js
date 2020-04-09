@@ -1,11 +1,12 @@
 import React from "react";
 import AlgorithmSelector from "./AlgorithmSelector";
+import TileTypeSelector from "./TileTypeSelector";
 
 function PathFindingOptions() {
   return (
-    <div className="container text-center">
-      <h2>Path Finding Options</h2>
+    <div className="container">
       <AlgorithmSelector />
+      <TileTypeSelector />
     </div>
   );
 }
