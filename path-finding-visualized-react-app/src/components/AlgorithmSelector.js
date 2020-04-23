@@ -6,7 +6,7 @@ function AlgorithmSelector() {
       <label>
         Selected algorithm:
         <select>
-          <option>BTS</option>
+          <option>BFS</option>
           <option>Djikstra</option>
           <option>A*</option>
         </select>
