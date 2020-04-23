@@ -4,6 +4,7 @@ class GridTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { colour: this.props.defaultColour };
+    this.props.tile.registerOnStateChangeObserver(this.onStateChange);
   }
 
   render() {
@@ -17,9 +18,19 @@ class GridTile extends React.Component {
     );
   }
 
-  onHoverStart = () => this.setState({ colour: "bg-secondary" });
+  onHoverStart = () => this.changeTileState("PassingThrough");
+  onHoverEnd = () => this.changeTileState("Default");
 
-  onHoverEnd = () => this.setState({ colour: this.props.defaultColour });
+  onStateChange = (newState) => {
+    if (newState === "Default") this.changeTileColour(this.props.defaultColour);
+    else if (newState === "PassingThrough") this.changeTileColour("bg-warning");
+  };
+
+  changeTileColour = (newColour) =>
+    this.setState((prevState, props) => ({
+      colour: newColour,
+    }));
+  changeTileState = (newState) => (this.props.tile.state = newState);
 }
 
 GridTile.defaultProps = {
