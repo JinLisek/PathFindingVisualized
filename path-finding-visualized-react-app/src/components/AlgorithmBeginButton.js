@@ -11,7 +11,7 @@ class AlgorithmBeginButton extends React.Component {
   }
 
   onBegin = () => {
-    if (this.props.startTile) breadthFirstSearch(this.props.startTile);
+    if (this.props.startTile) breadthFirstSearch(this.props.startTile, this.props.endTile);
   };
 }
 

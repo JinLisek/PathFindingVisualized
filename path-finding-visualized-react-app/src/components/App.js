@@ -15,7 +15,11 @@ class App extends React.Component {
       <div className="container-fluid">
         <AppHeader />
         <main className="container-fluid">
-          <PathFindingOptions startTile={this.state.startTile} onTileTypeChangedCallback={this.onTileTypeChanged} />
+          <PathFindingOptions
+            startTile={this.state.startTile}
+            endTile={this.state.endTile}
+            onTileTypeChangedCallback={this.onTileTypeChanged}
+          />
           <PathFindingGrid onTileClickCallback={this.onTileClick} />
         </main>
       </div>

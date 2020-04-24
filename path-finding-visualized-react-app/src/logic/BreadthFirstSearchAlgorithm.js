@@ -1,6 +1,6 @@
 import Queue from "../logic/Queue";
 
-const breadthFirstSearch = async (startTile) => {
+const breadthFirstSearch = async (startTile, endTile) => {
   startTile.state = "Start";
   let frontier = new Queue();
   frontier.enqueue(startTile);
@@ -11,6 +11,7 @@ const breadthFirstSearch = async (startTile) => {
     const currentTile = frontier.dequeue();
     for (const nextTile of currentTile.neighbours()) {
       if (visited.has(nextTile) === false) {
+        if (nextTile === endTile) return;
         frontier.enqueue(nextTile);
         nextTile.state = "Visited";
         visited.add(nextTile);
