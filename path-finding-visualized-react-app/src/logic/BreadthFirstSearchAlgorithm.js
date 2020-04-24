@@ -12,7 +12,7 @@ const breadthFirstSearch = async (startTile) => {
     for (const nextTile of currentTile.neighbours()) {
       if (visited.has(nextTile) === false) {
         frontier.enqueue(nextTile);
-        nextTile.state = "PassingThrough";
+        nextTile.state = "Visited";
         visited.add(nextTile);
         await new Promise((r) => setTimeout(r, 100));
       }

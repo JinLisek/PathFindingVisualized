@@ -23,7 +23,7 @@ class GridTile extends React.Component {
   onStateChange = (newState) => {
     if (newState === "Default") this.changeTileColour(this.props.defaultColour);
     else if (newState === "Start") this.changeTileColour("bg-success");
-    else if (newState === "PassingThrough") this.changeTileColour("bg-warning");
+    else if (newState === "Visited") this.changeTileColour("bg-warning");
   };
 
   changeTileColour = (newColour) =>
