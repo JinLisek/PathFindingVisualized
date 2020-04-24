@@ -20,10 +20,10 @@ class PathFindingGrid extends React.Component {
     for (let vertical = 0; vertical < tileGrid.length; ++vertical) {
       for (let horizontal = 0; horizontal < tileGrid[vertical].length; ++horizontal) {
         let tile = tileGrid[vertical][horizontal];
-        if (horizontal - 1 >= 0) tile.left = tileGrid[vertical][horizontal - 1];
-        if (horizontal + 1 <= width) tile.right = tileGrid[vertical][horizontal + 1];
-        if (vertical - 1 >= 0) tile.top = tileGrid[vertical - 1][horizontal];
-        if (vertical + 1 <= height) tile.bottom = tileGrid[vertical + 1][horizontal];
+        if (horizontal - 1 >= 0) tile.addNeighbour(tileGrid[vertical][horizontal - 1]);
+        if (horizontal + 1 <= width) tile.addNeighbour(tileGrid[vertical][horizontal + 1]);
+        if (vertical - 1 >= 0) tile.addNeighbour(tileGrid[vertical - 1][horizontal]);
+        if (vertical + 1 <= height) tile.addNeighbour(tileGrid[vertical + 1][horizontal]);
       }
     }
 

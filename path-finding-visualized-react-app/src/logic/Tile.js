@@ -1,7 +1,6 @@
 class Tile {
   constructor(vertical, horizontal) {
     this.onStateChangeCallback = null;
-    this.#state = "Default";
     this.vertical = vertical;
     this.horizontal = horizontal;
   }
@@ -15,22 +14,16 @@ class Tile {
     if (this.onStateChangeCallback) this.onStateChangeCallback(this.#state);
   }
 
-  neighbours() {
-    let neighbours = [];
-    if (this.top) neighbours.push(this.top);
-    if (this.right) neighbours.push(this.right);
-    if (this.bottom) neighbours.push(this.bottom);
-    if (this.left) neighbours.push(this.left);
+  addNeighbour(neighbour) {
+    this.#neighbours.push(neighbour);
+  }
 
-    return neighbours;
+  neighbours() {
+    return this.#neighbours;
   }
 
   #state = "Default";
-
-  top = null;
-  right = null;
-  bottom = null;
-  left = null;
+  #neighbours = [];
 }
 
 export default Tile;
