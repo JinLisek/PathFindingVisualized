@@ -22,14 +22,14 @@ class App extends React.Component {
     );
   }
 
-  onTileClick = (tile) => {
-    if (this.state.startTile) this.state.startTile.state = "Default";
-    tile.state = this.state.selectedTileType;
-
-    this.setState((prevState, props) => ({
-      startTile: tile,
-    }));
-  };
+  onTileClick = (tile) =>
+    this.setState((prevState, props) => {
+      if (prevState.startTile) prevState.startTile.state = "Default";
+      tile.state = this.state.selectedTileType;
+      return {
+        startTile: tile,
+      };
+    });
 }
 
 export default App;
