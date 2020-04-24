@@ -1,6 +1,6 @@
 import React from "react";
 
-function TileTypeSelector() {
+function TileTypeSelector(props) {
   return (
     <div className="container">
       <div className="form-check">
@@ -11,6 +11,7 @@ function TileTypeSelector() {
             value="start"
             defaultChecked
             className="form-check-input"
+            onClick={() => props.onTileTypeChangedCallback("Start")}
           ></input>
           Start
         </label>
@@ -22,6 +23,7 @@ function TileTypeSelector() {
             name="tile-type"
             value="end"
             className="form-check-input"
+            onClick={() => props.onTileTypeChangedCallback("End")}
           ></input>
           End
         </label>
@@ -33,6 +35,7 @@ function TileTypeSelector() {
             name="tile-type"
             value="obstacle"
             className="form-check-input"
+            onClick={() => props.onTileTypeChangedCallback("Obstacle")}
           ></input>
           Obstacle
         </label>

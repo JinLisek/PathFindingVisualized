@@ -14,6 +14,10 @@ class Tile {
     if (this.onStateChangeCallback) this.onStateChangeCallback(this.#state);
   }
 
+  get state() {
+    return this.#state;
+  }
+
   addNeighbour(neighbour) {
     this.#neighbours.push(neighbour);
   }

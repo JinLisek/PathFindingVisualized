@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { startTile: null, selectedTileType: "Start" };
+    this.state = { startTile: null, endTile: null, selectedTileType: "Start" };
   }
 
   render() {
@@ -15,19 +15,38 @@ class App extends React.Component {
       <div className="container-fluid">
         <AppHeader />
         <main className="container-fluid">
-          <PathFindingOptions startTile={this.state.startTile} />
+          <PathFindingOptions startTile={this.state.startTile} onTileTypeChangedCallback={this.onTileTypeChanged} />
           <PathFindingGrid onTileClickCallback={this.onTileClick} />
         </main>
       </div>
     );
   }
 
+  onTileTypeChanged = (selectedTileType) =>
+    this.setState((prevState, props) => ({
+      selectedTileType: selectedTileType,
+    }));
+
   onTileClick = (tile) =>
     this.setState((prevState, props) => {
-      if (prevState.startTile) prevState.startTile.state = "Default";
       tile.state = this.state.selectedTileType;
+
+      if (this.state.selectedTileType === "Start") {
+        if (prevState.startTile && tile !== prevState.startTile) prevState.startTile.state = "Default";
+        return {
+          startTile: tile,
+          endTile: tile === prevState.endTile ? null : prevState.endTile,
+        };
+      }
+
+      if (this.state.selectedTileType === "End") {
+        if (prevState.endTile && tile !== prevState.endTile) prevState.endTile.state = "Default";
+        return { endTile: tile, startTile: tile === prevState.startTile ? null : prevState.startTile };
+      }
+
       return {
-        startTile: tile,
+        startTile: tile === prevState.startTile ? null : prevState.startTile,
+        endTile: tile === prevState.endTile ? null : prevState.endTile,
       };
     });
 }
