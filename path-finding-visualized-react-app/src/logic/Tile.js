@@ -15,6 +15,16 @@ class Tile {
     if (this.onStateChangeCallback) this.onStateChangeCallback(this.#state);
   }
 
+  neighbours() {
+    let neighbours = [];
+    if (this.top) neighbours.push(this.top);
+    if (this.right) neighbours.push(this.right);
+    if (this.bottom) neighbours.push(this.bottom);
+    if (this.left) neighbours.push(this.left);
+
+    return neighbours;
+  }
+
   #state = "Default";
 
   top = null;
