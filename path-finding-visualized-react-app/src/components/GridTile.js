@@ -1,4 +1,5 @@
 import React from "react";
+import breadthFirstSearch from "../logic/BreadthFirstSearchAlgorithm";
 
 class GridTile extends React.Component {
   constructor(props) {
@@ -12,17 +13,16 @@ class GridTile extends React.Component {
       <div
         className={"border d-inline-block " + this.state.colour}
         style={{ width: "30px", height: "30px", fontSize: 10 }}
-        onMouseEnter={this.onHoverStart}
-        onMouseLeave={this.onHoverEnd}
+        onClick={this.onTileClick}
       ></div>
     );
   }
 
-  onHoverStart = () => this.changeTileState("PassingThrough");
-  onHoverEnd = () => this.changeTileState("Default");
+  onTileClick = () => breadthFirstSearch(this.props.tile);
 
   onStateChange = (newState) => {
     if (newState === "Default") this.changeTileColour(this.props.defaultColour);
+    else if (newState === "Start") this.changeTileColour("bg-success");
     else if (newState === "PassingThrough") this.changeTileColour("bg-warning");
   };
 
