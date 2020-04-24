@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { startTile: null };
+    this.state = { startTile: null, selectedTileType: "Start" };
   }
 
   render() {
@@ -22,10 +22,14 @@ class App extends React.Component {
     );
   }
 
-  onTileClick = (tile) =>
+  onTileClick = (tile) => {
+    if (this.state.startTile) this.state.startTile.state = "Default";
+    tile.state = this.state.selectedTileType;
+
     this.setState((prevState, props) => ({
       startTile: tile,
     }));
+  };
 }
 
 export default App;
