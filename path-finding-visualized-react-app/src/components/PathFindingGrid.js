@@ -3,8 +3,9 @@ import GridTile from "./GridTile";
 import Tile from "../logic/Tile";
 
 class PathFindingGrid extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     let tileGrid = [];
     const width = 50;
     const height = 15;
@@ -34,11 +35,17 @@ class PathFindingGrid extends React.Component {
     return <div className="container-fluid">{this.createGrid()}</div>;
   }
 
+  onTileClick = (tile) => this.props.onTileClickCallback(tile);
+
   createGrid() {
     return this.state.tileGrid.map((row) => (
       <div className="container-fluid" style={{ fontSize: 0 }} key={"Row:" + row[0].vertical}>
         {row.map((tile) => (
-          <GridTile key={"Tile:" + tile.vertical + "#" + tile.horizontal} tile={tile} />
+          <GridTile
+            key={"Tile:" + tile.vertical + "#" + tile.horizontal}
+            tile={tile}
+            onTileClickCallback={this.onTileClick}
+          />
         ))}
       </div>
     ));

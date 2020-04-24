@@ -1,9 +1,9 @@
 import React from "react";
-import breadthFirstSearch from "../logic/BreadthFirstSearchAlgorithm";
 
 class GridTile extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { colour: this.props.defaultColour };
     this.props.tile.registerOnStateChangeObserver(this.onStateChange);
   }
@@ -18,7 +18,7 @@ class GridTile extends React.Component {
     );
   }
 
-  onTileClick = () => breadthFirstSearch(this.props.tile);
+  onTileClick = () => this.props.onTileClickCallback(this.props.tile);
 
   onStateChange = (newState) => {
     if (newState === "Default") this.changeTileColour(this.props.defaultColour);
