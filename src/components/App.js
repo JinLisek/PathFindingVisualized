@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { startTile: null, endTile: null, selectedTileType: "Start" };
+    this.state = { selectedTileType: "Start" };
   }
 
   render() {
@@ -30,30 +30,26 @@ class App extends React.Component {
     }));
 
   onTileClick = (tile) => {
-    this.setState((prevState, props) => {
-      tile.state = this.state.selectedTileType;
+    tile.state = this.state.selectedTileType;
 
-      if (this.state.selectedTileType === "Start") {
-        if (prevState.startTile && tile !== prevState.startTile) prevState.startTile.state = "Default";
-        props.setStartTile(tile);
-        return {
-          startTile: tile,
-          endTile: tile === prevState.endTile ? null : prevState.endTile,
-        };
-      }
-
-      if (this.state.selectedTileType === "End") {
-        if (prevState.endTile && tile !== prevState.endTile) prevState.endTile.state = "Default";
-        props.setEndTile(tile);
-        return { endTile: tile, startTile: tile === prevState.startTile ? null : prevState.startTile };
-      }
-
-      return {
-        startTile: tile === prevState.startTile ? null : prevState.startTile,
-        endTile: tile === prevState.endTile ? null : prevState.endTile,
-      };
-    });
+    if (this.state.selectedTileType === "Start") {
+      if (this.props.startTile && tile !== this.props.startTile) this.props.startTile.state = "Default";
+      this.props.setStartTile(tile);
+      if (tile === this.props.endTile) this.props.setEndTile(null);
+    } else if (this.state.selectedTileType === "End") {
+      if (this.props.endTile && tile !== this.props.endTile) this.props.endTile.state = "Default";
+      this.props.setEndTile(tile);
+      if (tile === this.props.startTile) this.props.setStartTile(null);
+    } else if (this.state.selectedTileType === "Obstacle") {
+      if (tile === this.props.startTile) this.props.setStartTile(null);
+      if (tile === this.props.endTile) this.props.setEndTile(null);
+    }
   };
 }
 
-export default connect(null, { setStartTile, setEndTile })(App);
+function mapStateToProps(state) {
+  const { startTile, endTile } = state;
+  return { startTile, endTile };
+}
+
+export default connect(mapStateToProps, { setStartTile, setEndTile })(App);
