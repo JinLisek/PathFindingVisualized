@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setStartTile, setEndTile } from "../redux/actions";
 import AppHeader from "./AppHeader";
 import PathFindingOptions from "./PathFindingOptions";
 import PathFindingGrid from "./PathFindingGrid";
@@ -15,11 +17,7 @@ class App extends React.Component {
       <div className="container-fluid">
         <AppHeader />
         <main className="container-fluid">
-          <PathFindingOptions
-            startTile={this.state.startTile}
-            endTile={this.state.endTile}
-            onTileTypeChangedCallback={this.onTileTypeChanged}
-          />
+          <PathFindingOptions onTileTypeChangedCallback={this.onTileTypeChanged} />
           <PathFindingGrid onTileClickCallback={this.onTileClick} />
         </main>
       </div>
@@ -31,12 +29,13 @@ class App extends React.Component {
       selectedTileType: selectedTileType,
     }));
 
-  onTileClick = (tile) =>
+  onTileClick = (tile) => {
     this.setState((prevState, props) => {
       tile.state = this.state.selectedTileType;
 
       if (this.state.selectedTileType === "Start") {
         if (prevState.startTile && tile !== prevState.startTile) prevState.startTile.state = "Default";
+        props.setStartTile(tile);
         return {
           startTile: tile,
           endTile: tile === prevState.endTile ? null : prevState.endTile,
@@ -45,6 +44,7 @@ class App extends React.Component {
 
       if (this.state.selectedTileType === "End") {
         if (prevState.endTile && tile !== prevState.endTile) prevState.endTile.state = "Default";
+        props.setEndTile(tile);
         return { endTile: tile, startTile: tile === prevState.startTile ? null : prevState.startTile };
       }
 
@@ -53,6 +53,7 @@ class App extends React.Component {
         endTile: tile === prevState.endTile ? null : prevState.endTile,
       };
     });
+  };
 }
 
-export default App;
+export default connect(null, { setStartTile, setEndTile })(App);

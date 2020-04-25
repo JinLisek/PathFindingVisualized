@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import breadthFirstSearch from "../logic/BreadthFirstSearchAlgorithm";
 
 class AlgorithmBeginButton extends React.Component {
@@ -15,4 +16,9 @@ class AlgorithmBeginButton extends React.Component {
   };
 }
 
-export default AlgorithmBeginButton;
+function mapStateToProps(state) {
+  const { startTile, endTile } = state;
+  return { startTile, endTile };
+}
+
+export default connect(mapStateToProps, {})(AlgorithmBeginButton);

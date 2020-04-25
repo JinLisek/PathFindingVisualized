@@ -8,7 +8,7 @@ function PathFindingOptions(props) {
     <div className="container">
       <AlgorithmSelector />
       <TileTypeSelector onTileTypeChangedCallback={props.onTileTypeChangedCallback} />
-      <AlgorithmBeginButton startTile={props.startTile} endTile={props.endTile} />
+      <AlgorithmBeginButton />
     </div>
   );
 }
