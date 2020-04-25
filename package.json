@@ -1,6 +1,6 @@
 {
-  "homepage": "https://jinlisek.github.io/path-finding-visualized/",
-  "name": "path-finding-visualized",
+  "homepage": "https://jinlisek.github.io/jin-visualizes-path-finding/",
+  "name": "jin-visualizes-path-finding",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
