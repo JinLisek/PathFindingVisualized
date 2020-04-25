@@ -3,11 +3,11 @@ import AlgorithmSelector from "./AlgorithmSelector";
 import TileTypeSelector from "./TileTypeSelector";
 import AlgorithmBeginButton from "./AlgorithmBeginButton";
 
-function PathFindingOptions(props) {
+function PathFindingOptions() {
   return (
     <div className="container">
       <AlgorithmSelector />
-      <TileTypeSelector onTileTypeChangedCallback={props.onTileTypeChangedCallback} />
+      <TileTypeSelector />
       <AlgorithmBeginButton />
     </div>
   );

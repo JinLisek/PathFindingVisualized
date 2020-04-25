@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { selectTileType } from "../redux/actions";
 
 function TileTypeSelector(props) {
   return (
@@ -11,7 +13,7 @@ function TileTypeSelector(props) {
             value="start"
             defaultChecked
             className="form-check-input"
-            onClick={() => props.onTileTypeChangedCallback("Start")}
+            onClick={() => props.selectTileType("Start")}
           ></input>
           Start
         </label>
@@ -23,7 +25,7 @@ function TileTypeSelector(props) {
             name="tile-type"
             value="end"
             className="form-check-input"
-            onClick={() => props.onTileTypeChangedCallback("End")}
+            onClick={() => props.selectTileType("End")}
           ></input>
           End
         </label>
@@ -35,7 +37,7 @@ function TileTypeSelector(props) {
             name="tile-type"
             value="obstacle"
             className="form-check-input"
-            onClick={() => props.onTileTypeChangedCallback("Obstacle")}
+            onClick={() => props.selectTileType("Obstacle")}
           ></input>
           Obstacle
         </label>
@@ -44,4 +46,4 @@ function TileTypeSelector(props) {
   );
 }
 
-export default TileTypeSelector;
+export default connect(null, { selectTileType })(TileTypeSelector);
